@@ -132,6 +132,60 @@ CREATE DATABASE smart_campus_db;
 * **Authentication** – Secure role-based access
 
 ---
+## 📱 Screenshots
+
+<table>
+<tr>
+<td align="center">
+<img src="images/login page.png" width="400"/>
+<br><b>Login Page</b>
+</td>
+
+<td align="center">
+<img src="images/home page.png" width="400"/>
+<br><b>Home Page</b>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="images/facilities page.png" width="400"/>
+<br><b>Facilities Page</b>
+</td>
+
+<td align="center">
+<img src="images/ticket page.png" width="400"/>
+<br><b>Ticket Page</b>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="images/user setting page.png" width="400"/>
+<br><b>User Setting Page</b>
+</td>
+
+<td align="center">
+<img src="images/admin booking page.png" width="400"/>
+<br><b>Admin Booking Page</b>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="images/admin resources page.png" width="400"/>
+<br><b>Admin Resources Page</b>
+</td>
+
+<td align="center">
+<img src="images/admin ticket page.png" width="400"/>
+<br><b>Admin Ticket Page</b>
+</td>
+</tr>
+
+</table>
+
+---
 
 ## 📄 License
 
