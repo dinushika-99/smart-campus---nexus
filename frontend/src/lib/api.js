@@ -38,6 +38,46 @@ export const CATEGORY_IMAGES = {
   EQUIPMENT: "https://mgx-backend-cdn.metadl.com/generate/images/422425/2026-04-21/nbrj3eyaafna/card-meeting-room.png",
 };
 
+// ==================== TYPE NORMALIZATION MAPPING ====================
+// Maps specific resource types to their core/generic type for filtering
+export const TYPE_NORMALIZATION = {
+  // SPORTS
+  "FOOTBALL_FIELD": "FIELD",
+  "TENNIS_COURT": "COURT",
+  "BASKETBALL_COURT": "COURT",
+  "SWIMMING_POOL": "POOL",
+  "GYM": "GYM",
+  // ACADEMIC
+  "LECTURE_HALL": "HALL",
+  "LABORATORY": "LAB",
+  "COMPUTER_LAB": "LAB",
+  "DESIGN_STUDIO": "STUDIO",
+  "STUDY_ROOM": "ROOM",
+  // ADMINISTRATIVE
+  "MEETING_ROOM": "ROOM",
+  "CONFERENCE_ROOM": "CONFERENCE HALL",
+  // COMMON
+  "AUDITORIUM": "AUDITORIUM",
+  "LIBRARY": "LIBRARY",
+  "FOOD_AREA": "AREA",
+  "OPEN_SPACE": "SPACE",
+  "PARKING_LOT": "LOT",
+  // EQUIPMENT
+  "PROJECTOR": "PROJECTOR",
+  "VIDEO_CAMERA": "CAMERA",
+  "LAPTOP_SET": "SET",
+  "AUDIO_SYSTEM": "SYSTEM",
+  "MICROPHONE": "MICROPHONE",
+  "SPEAKER": "SPEAKER",
+};
+
+// Generate normalized CATEGORY_TYPES for filtering
+export const NORMALIZED_CATEGORY_TYPES = Object.keys(CATEGORY_TYPES).reduce((acc, category) => {
+  acc[category] = [...new Set(CATEGORY_TYPES[category].map(type => TYPE_NORMALIZATION[type] || type))];
+  return acc;
+}, {});
+
+
 // ==================== DISPLAY HELPERS ====================
 
 export function formatType(type) {
@@ -45,6 +85,10 @@ export function formatType(type) {
     .replace(/_/g, " ")
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+export function getNormalizedType(type) {
+  return TYPE_NORMALIZATION[type] || type;
 }
 
 export function formatCategory(category) {

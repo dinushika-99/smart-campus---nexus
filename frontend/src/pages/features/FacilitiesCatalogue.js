@@ -29,8 +29,10 @@ import {
   getAllResources,
   ALL_CATEGORIES,
   CATEGORY_TYPES,
+  NORMALIZED_CATEGORY_TYPES,
   CATEGORY_IMAGES,
   formatType,
+  getNormalizedType,
   formatCategory,
   getLocationString,
   formatTime,
@@ -67,6 +69,10 @@ export default function FacilitiesCatalogue() {
     fetchResources();
   }, []);
 
+  const normalizeString = (str) => {
+    return (str || "").toUpperCase().trim();
+  };
+
   async function fetchResources() {
     setLoading(true);
     setError(null);
@@ -83,10 +89,16 @@ export default function FacilitiesCatalogue() {
   }
 
   const availableTypes = useMemo(() => {
+    // Get normalized types from NORMALIZED_CATEGORY_TYPES
+    let types = [];
     if (selectedCategory === "ALL") {
-      return Object.values(CATEGORY_TYPES).flat();
+      types = Object.values(NORMALIZED_CATEGORY_TYPES).flat();
+    } else {
+      types = NORMALIZED_CATEGORY_TYPES[selectedCategory] || [];
     }
-    return CATEGORY_TYPES[selectedCategory] || [];
+
+    // Remove duplicates
+    return [...new Set(types)];
   }, [selectedCategory]);
 
   const filteredResources = useMemo(() => {
@@ -103,10 +115,11 @@ export default function FacilitiesCatalogue() {
           r.areaName.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesCategory =
-        selectedCategory === "ALL" || r.category === selectedCategory;
-      const matchesType = selectedType === "ALL" || r.type === selectedType;
+        selectedCategory === "ALL" || normalizeString(r.category) === normalizeString(selectedCategory);
+      const matchesType =
+        selectedType === "ALL" || normalizeString(getNormalizedType(r.type)) === normalizeString(selectedType);
       const matchesStatus =
-        selectedStatus === "ALL" || r.status === selectedStatus;
+        selectedStatus === "ALL" || normalizeString(r.status) === normalizeString(selectedStatus);
 
       return matchesSearch && matchesCategory && matchesType && matchesStatus;
     });
